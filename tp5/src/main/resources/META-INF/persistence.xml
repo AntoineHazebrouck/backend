@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0"
+	xsi:schemalocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+	<persistence-unit name="persistence-unit" transaction-type="RESOURCE_LOCAL">
+		<class>fr.but3.model.Auteur</class>
+		<class>fr.but3.model.Livre</class>
+
+		<properties>
+			<property name="jakarta.persistence.jdbc.url"
+				value="jdbc:h2:mem:database" />
+			<!-- <property
+				name="jakarta.persistence.jdbc.user" value="postgres" />
+			<property
+				name="jakarta.persistence.jdbc.password" value="12345678aAbB!" /> -->
+			<property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
+
+			<property
+				name="jakarta.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+
+			<property
+				name="jakarta.persistence.schema-generation.scripts.action"
+				value="drop-and-create" />
+			<property
+				name="jakarta.persistence.schema-generation.scripts.drop-target"
+				value="detruire.sql" />
+			<property
+				name="jakarta.persistence.schema-generation.scripts.create-target"
+				value="creer.sql" />
+			<property name="jakarta.persistence.sql-load-script-source"
+				value="data.sql" />
+
+
+			<property name="eclipselink.logging.level" value="FINEST" />
+
+		</properties>
+	</persistence-unit>
+</persistence>

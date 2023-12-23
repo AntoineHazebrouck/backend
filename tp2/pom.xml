@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>jez</groupId>
+    <artifactId>tp2</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+
+	<profiles>
+		<profile>
+			<id>toTomcat</id>
+			<build>
+				<directory>C:\Program Files\apache-tomcat-10.1.13\webapps\tp2\WEB-INF</directory>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sample3</groupId>
+			<artifactId>sample</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\Users\Jez\Desktop\travail\cours\BUT3\backend\tp1\src\main\resources\h2-2.2.222.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.sample</groupId>
+			<artifactId>sample</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\Program Files\apache-tomcat-10.1.13\lib\servlet-api.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.sample2</groupId>
+			<artifactId>sample2</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\Program Files\apache-tomcat-10.1.13\lib\postgresql-42.6.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.2</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M8</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
