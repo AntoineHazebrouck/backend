@@ -1,0 +1,24 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090
+          jwk-set-uri: http://localhost:9090/jwks
+          audiences: AIR_FRANCE 
+      client:
+        registration:
+          gitlab:
+            client-id: 5059734519afc4ea11ae4f2994f4727de2edd80469123a0edacda0fde25b7e18
+            client-secret: gloas-24812ed42bbcb313c6810e06cf3404d8d40fb1529c8f4c5f0dda97e4e540297e
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          gitlab:
+            issuer-uri: https://gitlab.univ-lille.fr
+
+logging:
+  level:
+    org.springframework.web.client.RestTemplate: DEBUG
