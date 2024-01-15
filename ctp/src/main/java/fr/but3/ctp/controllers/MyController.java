@@ -39,6 +39,7 @@ public class MyController
 				current = question;
 			}
 		}
+		System.out.println(current);
 		modelmap.put("currentQuestion", current);
 		modelmap.put("choix", current.getChoix());
 		return "mavue2";

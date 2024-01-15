@@ -20,7 +20,7 @@ public class Choix
 	private String libchoix;
 	private Boolean statut;
 	private Integer nbchoix;
-	@ManyToOne(targetEntity = Question.class)
+	// @ManyToOne(targetEntity = Question.class)
 	// @JoinColumn(name = "qno", nullable = false)
-	private Question qno;
+	// private Question qno;
 }
