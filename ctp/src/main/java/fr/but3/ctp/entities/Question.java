@@ -1,12 +1,18 @@
-// package fr.but3.ctp.entities;
+package fr.but3.ctp.entities;
 
-// import jakarta.persistence.Entity;
-// import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
 
-// @Data
-// @Entity
-// public class Question
-// {
-// private final String libquest;
-// private final boolean active;
-// }
+@Data
+@Entity
+public class Question
+{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer qno;
+	private String libquest;
+	private Boolean active;
+}
