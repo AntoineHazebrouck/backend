@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import fr.but3.ctp.entities.Question;
 import fr.but3.ctp.repositories.ChoixRepository;
 import fr.but3.ctp.repositories.QuestionRepository;
 
@@ -26,10 +27,36 @@ public class MyController
 		return "mavue";
 	}
 
+	@GetMapping("/voter")
+	public String voter(ModelMap modelmap)
+	{
+		Iterable<Question> questions = questionRepository.findAll();
+		Question current = null;
+		for (Question question : questions)
+		{
+			if (question.getActive())
+			{
+				current = question;
+			}
+		}
+		modelmap.put("currentQuestion", current);
+		modelmap.put("choix", current.getChoix());
+		return "mavue2";
+	}
+
 	@PostMapping(path = "/activer")
 	public String activerPost(@RequestParam String my_question, ModelMap modelmap)
 	{
-		System.out.println(my_question);
+		Iterable<Question> questions = questionRepository.findAll();
+		questions.forEach(question -> {
+			question.setActive(false);
+		});
+		questionRepository.saveAll(questions);
+
+		Question question = questionRepository.findById(Integer.parseInt(my_question.strip()))
+				.get();
+		question.setActive(true);
+		questionRepository.save(question);
 
 		modelmap.put("questions", questionRepository.findAll());
 		return "mavue";

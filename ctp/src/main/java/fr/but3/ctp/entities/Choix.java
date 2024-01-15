@@ -21,6 +21,6 @@ public class Choix
 	private Boolean statut;
 	private Integer nbchoix;
 	@ManyToOne(targetEntity = Question.class)
-	@JoinColumn(name = "qno", nullable = false)
-	private List<Question> qno;
+	// @JoinColumn(name = "qno", nullable = false)
+	private Question qno;
 }

@@ -1,5 +1,5 @@
-drop table if exists choix;
-drop table if exists question;
+drop table if exists choix cascade;
+drop table if exists question cascade;
 
 create table question (
        qno serial,

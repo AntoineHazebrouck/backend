@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
@@ -18,7 +19,7 @@ public class Question
 	private Integer qno;
 	private String libquest;
 	private Boolean active;
-	// @ManyToOne(targetEntity = Question.class)
+	@OneToMany
 	// @JoinColumn(name = "qno", nullable = false)
-	// private List<Question> qno;
+	private List<Choix> choix;
 }
