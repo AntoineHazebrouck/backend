@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import fr.but3.ctp.entities.Choix;
 import fr.but3.ctp.entities.Question;
 import fr.but3.ctp.repositories.ChoixRepository;
@@ -21,6 +22,26 @@ public class MyController
 	private ChoixRepository choixRepository;
 	@Autowired
 	private QuestionRepository questionRepository;
+
+	@GetMapping("/voir")
+	public String voir(ModelMap modelmap)
+	{
+		Iterable<Question> questions = questionRepository.findAll();
+		Question current = null;
+		for (Question question : questions)
+		{
+			if (question.getActive())
+			{
+				current = question;
+			}
+		}
+		System.out.println(current);
+		modelmap.put("currentQuestion", current);
+		modelmap.put("choix", current.getChoix());
+
+		return "mavue3";
+	}
+
 
 	@GetMapping("/activer")
 	public String activer(ModelMap modelmap)
@@ -62,15 +83,15 @@ public class MyController
 				current = aChoix;
 			}
 		}
-		current.setCno(current.getNbchoix() + 1);
+		current.setNbchoix(current.getNbchoix() + 1);
 
 		choixRepository.save(current);
 
-		return new RedirectView("/voter");
+		return new RedirectView("/voir");
 	}
 
 	@PostMapping(path = "/activer")
-	public String activerPost(@RequestParam String my_question, ModelMap modelmap)
+	public RedirectView activerPost(@RequestParam String my_question, ModelMap modelmap)
 	{
 		Iterable<Question> questions = questionRepository.findAll();
 		questions.forEach(question -> {
@@ -84,7 +105,7 @@ public class MyController
 		questionRepository.save(question);
 
 		modelmap.put("questions", questionRepository.findAll());
-		return "mavue";
+		return new RedirectView("/voter");
 	}
 
 
