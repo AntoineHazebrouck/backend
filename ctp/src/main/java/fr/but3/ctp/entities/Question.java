@@ -10,11 +10,11 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity(name = "question")
 public class Question
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer qno;
 	private String libquest;
 	private Boolean active;

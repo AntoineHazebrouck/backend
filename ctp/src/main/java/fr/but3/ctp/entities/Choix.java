@@ -1,6 +1,7 @@
 package fr.but3.ctp.entities;
 
 import java.util.List;
+import org.hibernate.annotations.ColumnDefault;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -11,14 +12,15 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity(name = "choix")
 public class Choix
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cno;
 	private String libchoix;
 	private Boolean statut;
+	@ColumnDefault(value = "0")
 	private Integer nbchoix;
 	// @ManyToOne(targetEntity = Question.class)
 	// @JoinColumn(name = "qno", nullable = false)
