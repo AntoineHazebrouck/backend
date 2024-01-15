@@ -39,6 +39,16 @@ public class MyController
 		modelmap.put("currentQuestion", current);
 		modelmap.put("choix", current.getChoix());
 
+		var nbGood = current.getChoix()
+				.stream()
+				.filter(choix -> choix.getStatut() == true)
+				.count();
+		var nbBad = current.getChoix()
+				.stream()
+				.filter(choix -> choix.getStatut() == true)
+				.count();
+		modelmap.put("percentage", (nbGood * nbBad) / 100);
+
 		return "mavue3";
 	}
 
@@ -83,7 +93,13 @@ public class MyController
 				current = aChoix;
 			}
 		}
-		current.setNbchoix(current.getNbchoix() + 1);
+		if (current.getNbchoix() == null)
+		{
+			current.setNbchoix(1);
+		} else
+		{
+			current.setNbchoix(current.getNbchoix() + 1);
+		}
 
 		choixRepository.save(current);
 

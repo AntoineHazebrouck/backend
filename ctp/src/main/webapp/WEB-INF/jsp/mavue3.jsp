@@ -10,3 +10,8 @@
 			}
 			%>
 	</ul>
+
+	<h1>
+		<% out.println(((Long) request.getAttribute("percentage"))); %>
+	</h1>
+
