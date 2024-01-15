@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,26 +42,49 @@ public class Controller
 			return flights.get(flightId);
 		} else
 		{
-			var JwtPrincipal = (JwtAuthenticationToken) principal;
 			flights.put(flightId,
-						new Flight(flightId, pilot.orElseGet(() -> {
-							boolean isPilot = JwtPrincipal.getAuthorities()
-									.stream()
-									.anyMatch(authority -> {
-										return authority.getAuthority()
-												.contains("pilot");
-									});
+						new Flight(
+								flightId,
+								pilot.orElseGet(() -> {
 
-							if (isPilot)
-							{
-								return JwtPrincipal.getName();
-							} else
-							{
-								throw new IllegalArgumentException();
-							}
+									var JwtPrincipal = (JwtAuthenticationToken) principal;
+									boolean isPilot = JwtPrincipal.getAuthorities()
+											.stream()
+											.anyMatch(authority -> {
+												return authority.getAuthority()
+														.contains("pilot");
+											});
 
-						}),
-								passengers.orElseThrow()));
+									if (isPilot)
+									{
+										return JwtPrincipal.getName();
+									} else
+									{
+										throw new IllegalArgumentException();
+									}
+
+								}),
+								passengers.orElseGet(() -> {
+									OAuth2AuthenticationToken token =
+											(OAuth2AuthenticationToken) principal;
+									OidcUser user = (OidcUser) token.getPrincipal();
+
+									boolean isGitlabUnivLilleUser = user.getAuthorities()
+											.stream()
+											.anyMatch(authority -> {
+												return authority.getAuthority()
+														.contains("OIDC_USER");
+											});
+
+									if (isGitlabUnivLilleUser)
+									{
+										return List.of(user.getUserInfo()
+												.getFullName());
+									} else
+									{
+										throw new IllegalArgumentException();
+									}
+								})));
 			return flights.get(flightId);
 		}
 	}
