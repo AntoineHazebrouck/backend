@@ -5,7 +5,7 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<title>Voter</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
-	<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css'>
 </head>
 <body>
 	<h1>
