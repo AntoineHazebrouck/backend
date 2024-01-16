@@ -26,15 +26,8 @@ public class MyController
 	@GetMapping("/voir")
 	public String voir(ModelMap modelmap)
 	{
-		Iterable<Question> questions = questionRepository.findAll();
-		Question current = null;
-		for (Question question : questions)
-		{
-			if (question.getActive())
-			{
-				current = question;
-			}
-		}
+		Question current = questionRepository.findByActive(true).get(0);
+		
 		System.out.println(current);
 		modelmap.put("currentQuestion", current);
 		modelmap.put("choix", current.getChoix());
@@ -42,12 +35,15 @@ public class MyController
 		var nbGood = current.getChoix()
 				.stream()
 				.filter(choix -> choix.getStatut() == true)
-				.count();
-		var nbBad = current.getChoix()
+				.mapToInt(choix -> choix.getNbchoix())
+				.sum();
+		var total = current.getChoix()
 				.stream()
-				.filter(choix -> choix.getStatut() == true)
-				.count();
-		modelmap.put("percentage", (nbGood * nbBad) / 100);
+				.mapToInt(choix -> choix.getNbchoix())
+				.sum();
+
+		long percentage = nbGood * 100 / total;
+		modelmap.put("percentage", percentage + "%");
 
 		return "mavue3";
 	}

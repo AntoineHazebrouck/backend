@@ -12,6 +12,6 @@
 	</ul>
 
 	<h1>
-		<% out.println(((Long) request.getAttribute("percentage"))); %>
+		<% out.println( request.getAttribute("percentage")); %>
 	</h1>
 
