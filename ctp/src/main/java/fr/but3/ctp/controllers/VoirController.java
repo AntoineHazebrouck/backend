@@ -31,7 +31,12 @@ public class VoirController {
 				.mapToInt(choix -> choix.getNbchoix())
 				.sum();
 
-		long percentage = nbGood * 100 / total;
+		long percentage;
+		if (total <= 0) {
+			percentage = 0;
+		} else {
+			percentage = nbGood * 100 / total;
+		}
 		modelmap.put("percentage", percentage + "%");
 
 		return "voir";

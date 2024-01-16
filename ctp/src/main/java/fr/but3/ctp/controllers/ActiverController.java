@@ -37,6 +37,6 @@ public class ActiverController {
 		questionRepository.save(question);
 
 		modelmap.put("questions", questionRepository.findAll());
-		return new RedirectView("/voter");
+		return new RedirectView("/voir");
 	}
 }
