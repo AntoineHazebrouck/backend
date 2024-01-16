@@ -8,6 +8,13 @@
 	<link rel='stylesheet' type='text/css' media='screen' href='https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css'>
 </head>
 <body class="container text-center">
+	
+	<header class="row">
+		<h1>
+			<%= request.getAttribute("username") %>
+		</h1>
+	</header>
+
 	<div class="row align-items-center h-100">
 			
 		<div class="col-10 card mx-auto">

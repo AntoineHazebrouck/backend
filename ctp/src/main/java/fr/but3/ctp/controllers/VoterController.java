@@ -1,5 +1,6 @@
 package fr.but3.ctp.controllers;
 
+import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class VoterController {
 	private final QuestionRepository questionRepository;
 
 	@GetMapping("/voter")
-	public String voter(ModelMap modelmap)
+	public String voter(ModelMap modelmap, Principal principal)
 	{
 		Iterable<Question> questions = questionRepository.findAll();
 		Question current = null;
@@ -31,6 +32,8 @@ public class VoterController {
 			}
 		}
 		System.out.println(current);
+
+		modelmap.put("username", principal.getName());
 		modelmap.put("currentQuestion", current);
 		modelmap.put("choix", current.getChoix());
 		return "voter";

@@ -1,5 +1,6 @@
 package fr.but3.ctp.controllers;
 
+import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,12 @@ public class VoirController {
 	private final QuestionRepository questionRepository;
 
 	@GetMapping("/voir")
-	public String voir(ModelMap modelmap)
+	public String voir(ModelMap modelmap, Principal principal)
 	{
 		Question current = questionRepository.findByActive(true).get(0);
 		
 		System.out.println(current);
+		modelmap.put("username", principal.getName());
 		modelmap.put("currentQuestion", current);
 		modelmap.put("choix", current.getChoix());
 

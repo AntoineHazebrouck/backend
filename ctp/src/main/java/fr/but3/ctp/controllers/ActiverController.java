@@ -1,5 +1,6 @@
 package fr.but3.ctp.controllers;
 
+import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,9 @@ public class ActiverController {
 	private final QuestionRepository questionRepository;
 
 	@GetMapping("/activer")
-	public String activer(ModelMap modelmap)
+	public String activer(ModelMap modelmap, Principal principal)
 	{
+		modelmap.put("username", principal.getName());
 		modelmap.put("questions", questionRepository.findAll());
 		return "activer";
 	}

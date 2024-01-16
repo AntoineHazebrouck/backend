@@ -13,6 +13,12 @@
 
 	<body class="container text-center">
 
+		<header class="row">
+			<h1>
+				<%= request.getAttribute("username") %>
+			</h1>
+		</header>
+
 		<div class="row align-items-center h-100">
 			
 			<div class="col-10 card mx-auto">
