@@ -7,24 +7,29 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link rel='stylesheet' type='text/css' media='screen' href='https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css'>
 </head>
-<body>
-	<h1>
-		<% out.println(((Question) request.getAttribute("currentQuestion")).getLibquest()); %>
-	</h1>
-	<ul>
-		<% for (var choixObj : (List) request.getAttribute("choix")) { Choix choix=(Choix) choixObj; 
-			out.println("<li>%s -> %s</li>".formatted(choix.getLibchoix(), choix.getNbchoix()));
+<body class="container text-center">
 
-			}
-			%>
-	</ul>
+	<div class="row align-items-center h-100">
+			
+		<div class="col-10 card mx-auto">
+			
+			<H1 class="my-5"> <%= ((Question) request.getAttribute("currentQuestion")).getLibquest() %></H1>
 
-	<h3>
-		Il y a 
-		<% out.println( request.getAttribute("percentage")); %>
-		de bonnes réponses
-	</h3>
+			
+			<ul class="list-group">
+				<% for (var choixObj : (List) request.getAttribute("choix")) { Choix choix=(Choix) choixObj; %>
+					<li class="list-group-item"><%= choix.getLibchoix() %> -> <%= choix.getNbchoix() %> votes</li>
+					
+				<% } %>
+			</ul>
 
-	<a href="activer">activer</a>
+			<h3 class="my-5">Il y a <%= request.getAttribute("percentage") %> de bonnes réponses </h3>
+			<a class="btn btn-primary my-3" href="activer">Retour vers activer</a>
+		</div>
+	</div>
+
+
+
+	
 </body>
 </html>
