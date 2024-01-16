@@ -11,7 +11,9 @@
 			%>
 	</ul>
 
-	<h1>
+	<h3>
+		Il y a 
 		<% out.println( request.getAttribute("percentage")); %>
-	</h1>
+		de bonnes réponses
+	</h3>
 
