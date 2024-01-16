@@ -1,5 +1,5 @@
 <%@ page import="java.util.*,fr.but3.ctp.entities.*" %>
-<html>
+<html lang="fr">
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -24,5 +24,7 @@
 		<% out.println( request.getAttribute("percentage")); %>
 		de bonnes réponses
 	</h3>
+
+	<a href="activer">activer</a>
 </body>
 </html>
