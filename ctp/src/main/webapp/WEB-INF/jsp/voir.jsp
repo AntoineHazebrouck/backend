@@ -1,5 +1,13 @@
 <%@ page import="java.util.*,fr.but3.ctp.entities.*" %>
-
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>Voir</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
 	<h1>
 		<% out.println(((Question) request.getAttribute("currentQuestion")).getLibquest()); %>
 	</h1>
@@ -16,4 +24,5 @@
 		<% out.println( request.getAttribute("percentage")); %>
 		de bonnes réponses
 	</h3>
-
+</body>
+</html>
