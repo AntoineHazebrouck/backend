@@ -28,7 +28,7 @@
 						</div>
 						
 						<% } %>
-							<input type="submit" value="Activer">
+						<button class="btn btn-primary" type="submit">Activer</button>
 				</form>
 			</div>
 		</div>
