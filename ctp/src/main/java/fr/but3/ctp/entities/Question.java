@@ -1,6 +1,7 @@
 package fr.but3.ctp.entities;
 
 import java.util.List;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,8 @@ public class Question
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer qno;
 	private String libquest;
-	private Boolean active;
+	@Column(columnDefinition = "boolean default false")
+	private Boolean active = false;
 	@OneToMany
 	@JoinColumn(name = "qno", nullable = false)
 	private List<Choix> choix;

@@ -1,11 +1,10 @@
 package fr.but3.ctp.entities;
 
-import java.util.Optional;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -17,13 +16,6 @@ public class Choix
 	private Integer cno;
 	private String libchoix;
 	private Boolean statut;
+	@Column(columnDefinition = "integer default 0")
 	private Integer nbchoix;
-	@ManyToOne
-	private Question question;
-
-	public Integer getNbchoix() {
-		return Optional.ofNullable(nbchoix).orElse(0);
-	}
-
-	
 }

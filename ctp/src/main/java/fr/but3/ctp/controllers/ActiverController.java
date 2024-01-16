@@ -7,14 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import fr.but3.ctp.entities.Question;
-import fr.but3.ctp.repositories.ChoixRepository;
 import fr.but3.ctp.repositories.QuestionRepository;
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
 public class ActiverController {
-	private final ChoixRepository choixRepository;
 	private final QuestionRepository questionRepository;
 
 	@GetMapping("/activer")
