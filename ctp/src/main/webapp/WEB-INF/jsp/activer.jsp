@@ -11,27 +11,31 @@
 			href='https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css'>
 	</head>
 
-	<body class="container justify-content-center text-center">
+	<body class="container text-center">
 
-			<H1 class="justify-content-center">Liste des questions</H1>
+		<div class="row align-items-center h-100">
 			
-			<form method="POST" action="/activer" class="justify-content-center">
-				<% for (var questionObj : (List) request.getAttribute("questions")) { 
-					Question question=(Question)
-					questionObj; out.println("<input type=\"radio\" ");
-				out.println(" name=\"my_question\" ");
-				out.println(" id=\" %s\" ".formatted(question.getQno()));
-				out.println(" value=\" %s\" ".formatted(question.getQno()));
-				out.println(">");
+			<div class="col-10 card mx-auto">
+				<H1 class="">Liste des questions</H1>
 	
-					out.println("<label for=\"%s\">%s</label><br>".formatted(question.getQno(), question.getLibquest()));
-	
-					}
-					%>
-					<input type="submit" value="Submit">
-			</form>
+				<form method="POST" action="/activer">
+					<% for (var questionObj : (List) request.getAttribute("questions")) { Question question=(Question)
+						questionObj; %>
+						
+						<div class="form-group">
+							<input class="form-check-input" type="radio" name="my_question" id="<%= question.getQno() %>" value="<%= question.getQno() %>">
+							<label class="form-check-label" for="<%= question.getQno() %>"><%= question.getLibquest() %></label><br>
+						</div>
+						
+						<% } %>
+							<input type="submit" value="Activer">
+				</form>
+			</div>
+		</div>
 
 		
+
+
 	</body>
 
 	</html>
