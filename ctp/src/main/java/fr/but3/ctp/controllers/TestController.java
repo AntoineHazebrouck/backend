@@ -9,6 +9,7 @@ import fr.but3.ctp.repositories.ChoixRepository;
 import fr.but3.ctp.repositories.QuestionRepository;
 
 
+
 @RestController
 public class TestController
 {
@@ -17,6 +18,11 @@ public class TestController
 	@Autowired
 	private QuestionRepository questionRepository;
 
+	@GetMapping("/test")
+	public String hello() {
+		return "<h1>Hello World!</h1>";
+	}
+	
 	@GetMapping("/questions")
 	public Iterable<Question> allQuestions()
 	{
