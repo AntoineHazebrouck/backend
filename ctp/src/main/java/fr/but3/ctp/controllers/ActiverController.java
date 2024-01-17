@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+import fr.but3.ctp.entities.Choix;
 import fr.but3.ctp.entities.Question;
+import fr.but3.ctp.repositories.ChoixRepository;
 import fr.but3.ctp.repositories.QuestionRepository;
 import lombok.AllArgsConstructor;
 
@@ -17,6 +19,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ActiverController {
 	private final QuestionRepository questionRepository;
+	private final ChoixRepository choixRepository;
 
 	@GetMapping({"/activer", "/"})
 	public String activer(ModelMap modelmap, Principal principal)
@@ -31,12 +34,27 @@ public class ActiverController {
 	{
 		desactiverQuestions();
 
+		desactiverChoix();
 
+		
 		int questionId = Integer.parseInt(my_question.strip());
 		activerQuestion(questionId);
 
+
+
 		modelmap.put("questions", questionRepository.findAll());
 		return new RedirectView("/voir");
+	}
+
+	private void desactiverChoix()
+	{
+		List<Choix> choixDesactives = choixRepository.findAll().stream()
+			.map(choix -> {
+				choix.setNbchoix(0);
+				return choix;
+			})
+			.toList();
+		choixRepository.saveAll(choixDesactives);
 	}
 
 	private void activerQuestion(int questionId)
