@@ -22,6 +22,7 @@ Q4 fait (il faut gerer le null lié au manque du default à zero pour nbchoix)
 
 #### Remarques
 
+- trop difficile de faire valider les questions aux encadrants trop occupés pendant le ctp
 - Il y a un problème d'encodage des strings, c'est probablement lié à l'utilisation d'H2 in memory. Le mauvais encodage apparait même dans la console H2 ...
 - les utilisateurs ne sont pas liés à JPA, les tables USERS/AUTHORITIES sont créées dans la base H2 dans schema.sql, les utilisateurs sont créés dans le code à l'initation de spring via ApplicationRunner
 
