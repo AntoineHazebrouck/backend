@@ -9,10 +9,20 @@
 </head>
 <body class="container text-center">
 
-	<header class="row">
-		<h1>
-			<%= request.getAttribute("username") %>
-		</h1>
+	<header class="row align-items-center">
+		<div class="col">
+			<h1>
+				<%= request.getAttribute("username") %>
+			</h1>
+		</div>
+		<div class="col">
+			<img class="mt-5"
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Logotype_Universit%C3%A9_de_Lille_2022.svg/2560px-Logotype_Universit%C3%A9_de_Lille_2022.svg.png"
+				width="200"
+				alt="logo-univ-lille">
+		</div>
+
+
 	</header>
 	
 	<div class="row align-items-center h-100">
