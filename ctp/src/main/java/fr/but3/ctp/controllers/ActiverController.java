@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class ActiverController {
 	private final QuestionRepository questionRepository;
 
-	@GetMapping("/activer")
+	@GetMapping({"/activer", "/"})
 	public String activer(ModelMap modelmap, Principal principal)
 	{
 		modelmap.put("username", principal.getName());
