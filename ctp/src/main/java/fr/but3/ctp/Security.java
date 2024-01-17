@@ -26,7 +26,6 @@ public class Security
 			HandlerMappingIntrospector introspector)
 			throws Exception
 	{
-		// MvcRequestMatcher.Builder mvc = new MvcRequestMatcher.Builder(introspector);
 		return http.authorizeHttpRequests((authorize) -> authorize
 				.requestMatchers("/activer", "/voir")
 				.hasRole("ADMIN")
@@ -35,6 +34,7 @@ public class Security
 				.anyRequest()
 				.permitAll())
 				.csrf(csrf -> csrf.disable())
+				.headers(headers -> headers.disable())
 				.formLogin(Customizer.withDefaults())
 				.build();
 	}

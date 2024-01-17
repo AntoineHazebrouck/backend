@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,fr.but3.ctp.entities.*" %>
 
 	<html lang="fr">
 
 	<head>
 		<meta charset='utf-8'>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 		<title>Activer</title>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
