@@ -18,7 +18,7 @@ Q4 fait (il faut gerer le null lié au manque du default à zero pour nbchoix)
 
 - JSP trop chronophages, aucun outil adapté au développement de JSP (en tout cas sur VSCode)
 - questions dans le mauvais ordre ? il faut logiquement JPA pour récuperer les données à afficher, sinon on pert du temps à intégrer un systeme temporaire
-- trop de petits détails de configurations en concurrence selon les modules (comme la console H2 et security par example, ou csrf pour les formulaires, ...)
+- trop de petits détails de configurations en concurrence selon les modules (comme la console H2 et security par exemple, ou csrf pour les formulaires, ...) qui ne sont pas representatifs de la comprehension qui se cache derriere
 
 #### Remarques
 
