@@ -29,7 +29,7 @@
 	<div class="row align-items-center h-100">
 		<div class="col">
 			<h1>Vous avez répondu : <%= ((Choix) request.getAttribute("choix")).getLibchoix() %> </h1>
-			<a class="btn btn-primary my-3" href="logout">Logout</a>
+			<a class="btn btn-primary my-3" href="/logout">Logout</a>
 		</div>
 	</div>
 
