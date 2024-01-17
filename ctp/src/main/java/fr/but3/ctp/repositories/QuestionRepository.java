@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface QuestionRepository extends CrudRepository<Question, Integer>
 {
+	List<Question> findAll();
 	List<Question> findByActive(Boolean active);
 }

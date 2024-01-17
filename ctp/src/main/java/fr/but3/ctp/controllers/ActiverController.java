@@ -1,6 +1,8 @@
 package fr.but3.ctp.controllers;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,18 +29,33 @@ public class ActiverController {
 	@PostMapping(path = "/activer")
 	public RedirectView activerPost(@RequestParam String my_question, ModelMap modelmap)
 	{
-		Iterable<Question> questions = questionRepository.findAll();
-		questions.forEach(question -> {
-			question.setActive(false);
-		});
-		questionRepository.saveAll(questions);
+		desactiverQuestions();
 
-		Question question = questionRepository.findById(Integer.parseInt(my_question.strip()))
-				.get();
-		question.setActive(true);
-		questionRepository.save(question);
+
+		int questionId = Integer.parseInt(my_question.strip());
+		activerQuestion(questionId);
 
 		modelmap.put("questions", questionRepository.findAll());
 		return new RedirectView("/voir");
+	}
+
+	private void activerQuestion(int questionId)
+	{
+		Question question = questionRepository.findById(questionId).orElseThrow(() -> {
+			throw new NoSuchElementException("La question " + questionId + " n'existe pas");
+		});
+		question.setActive(true);
+		questionRepository.save(question);
+	}
+
+	private void desactiverQuestions()
+	{
+		List<Question> questionsDesactivees = questionRepository.findAll().stream()
+			.map(question -> {
+				question.setActive(false);
+				return question;
+			})
+			.toList();
+		questionRepository.saveAll(questionsDesactivees);
 	}
 }

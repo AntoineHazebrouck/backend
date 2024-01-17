@@ -18,7 +18,6 @@ public class VoirController {
 	{
 		Question current = questionRepository.findByActive(true).get(0);
 		
-		System.out.println(current);
 		modelmap.put("username", principal.getName());
 		modelmap.put("currentQuestion", current);
 		modelmap.put("choix", current.getChoix());
@@ -33,12 +32,8 @@ public class VoirController {
 				.mapToInt(choix -> choix.getNbchoix())
 				.sum();
 
-		long percentage;
-		if (total <= 0) {
-			percentage = 0;
-		} else {
-			percentage = nbGood * 100 / total;
-		}
+		long percentage = total <= 0 ? 0 : nbGood * 100 / total;
+		
 		modelmap.put("percentage", percentage + "%");
 
 		return "voir";

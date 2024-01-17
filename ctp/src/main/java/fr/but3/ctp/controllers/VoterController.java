@@ -1,6 +1,7 @@
 package fr.but3.ctp.controllers;
 
 import java.security.Principal;
+import java.util.NoSuchElementException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,23 +17,16 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-public class VoterController {
+public class VoterController
+{
 	private final ChoixRepository choixRepository;
 	private final QuestionRepository questionRepository;
 
 	@GetMapping("/voter")
 	public String voter(ModelMap modelmap, Principal principal)
 	{
-		Iterable<Question> questions = questionRepository.findAll();
-		Question current = null;
-		for (Question question : questions)
-		{
-			if (question.getActive())
-			{
-				current = question;
-			}
-		}
-		System.out.println(current);
+		Question current = questionRepository.findByActive(true)
+				.get(0);
 
 		modelmap.put("username", principal.getName());
 		modelmap.put("currentQuestion", current);
@@ -43,26 +37,13 @@ public class VoterController {
 	@PostMapping("/voter")
 	public RedirectView voterPost(@RequestParam String my_choix)
 	{
-		Iterable<Choix> choix = choixRepository.findAll();
-		Choix current = null;
-		for (Choix aChoix : choix)
-		{
-			if (
-				aChoix.getCno()
-						.equals(Integer.parseInt(my_choix.strip()))
-			)
-			{
-				current = aChoix;
-			}
-		}
-		if (current.getNbchoix() == null)
-		{
-			current.setNbchoix(1);
-		} else
-		{
-			current.setNbchoix(current.getNbchoix() + 1);
-		}
+		int choixId = Integer.parseInt(my_choix.strip());
+		Choix current = choixRepository.findById(choixId)
+				.orElseThrow(() -> {
+					throw new NoSuchElementException("Le choix " + choixId + " n'existe pas");
+				});
 
+		current.setNbchoix(current.getNbchoix() + 1);
 		choixRepository.save(current);
 
 		return new RedirectView("/apres-voter/" + current.getCno());
@@ -72,7 +53,9 @@ public class VoterController {
 	public String apresVoter(@PathVariable Integer cno, ModelMap modelmap, Principal principal)
 	{
 		modelmap.put("username", principal.getName());
-		modelmap.put("choix", choixRepository.findById(cno).get());
+		modelmap.put(	"choix",
+						choixRepository.findById(cno)
+								.get());
 		return "apres_voter";
 	}
 }
