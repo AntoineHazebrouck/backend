@@ -4,6 +4,7 @@ import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
@@ -64,6 +65,14 @@ public class VoterController {
 
 		choixRepository.save(current);
 
-		return new RedirectView("/voir");
+		return new RedirectView("/apres-voter/" + current.getCno());
+	}
+
+	@GetMapping("/apres-voter/{cno}")
+	public String apresVoter(@PathVariable Integer cno, ModelMap modelmap, Principal principal)
+	{
+		modelmap.put("username", principal.getName());
+		modelmap.put("choix", choixRepository.findById(cno).get());
+		return "apres_voter";
 	}
 }

@@ -27,29 +27,9 @@
 	</header>
 	
 	<div class="row align-items-center h-100">
-			
-		<div class="col-10 card mx-auto">
-			
-			<H1 class="my-5"> <%= ((Question) request.getAttribute("currentQuestion")).getLibquest() %></H1>
-
-			
-			<ul class="list-group">
-				<% for (var choixObj : (List) request.getAttribute("choix")) { Choix choix=(Choix) choixObj; %>
-					<li class="list-group-item"><%= choix.getLibchoix() %> -> <%= choix.getNbchoix() %> votes</li>
-					
-				<% } %>
-			</ul>
-
-			<h3 class="my-5">Il y a <%= request.getAttribute("percentage") %> de bonnes réponses </h3>
-
-			<div class="row">
-				<div class="col">
-					<a class="btn btn-primary my-3" href="activer">Retour vers activer</a>
-				</div>
-				<div class="col">
-					<a class="btn btn-primary my-3" href="logout">Logout</a>
-				</div>
-			</div>
+		<div class="col">
+			<h1>Vous avez répondu : <%= ((Choix) request.getAttribute("choix")).getLibchoix() %> </h1>
+			<a class="btn btn-primary my-3" href="logout">Logout</a>
 		</div>
 	</div>
 
