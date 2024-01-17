@@ -40,7 +40,15 @@
 			</ul>
 
 			<h3 class="my-5">Il y a <%= request.getAttribute("percentage") %> de bonnes réponses </h3>
-			<a class="btn btn-primary my-3" href="activer">Retour vers activer</a>
+
+			<div class="row">
+				<div class="col">
+					<a class="btn btn-primary my-3" href="activer">Retour vers activer</a>
+				</div>
+				<div class="col">
+					<a class="btn btn-primary my-3" href="logout">Logout</a>
+				</div>
+			</div>
 		</div>
 	</div>
 
